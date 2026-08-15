@@ -1,0 +1,862 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/Klein.png">
+  <link rel="icon" href="/img/Klein.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="splend21">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一个 Markdown 文件就能让 AI 智能体学会新技能——这就是 Agent Skills 正在改变 AI 开发方式的故事。  前言你有没有遇到过这样的情况：每次和 AI 助手对话，都得重复解释”我们团队的 commit message 格式是 conventional commits”、”每个 PR 合并前必须过安全检查清单”、”代码风格按照我们的 ESLint 配置来”。说一遍还行，每次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Agent Skills：给 AI 智能体装上&quot;技能包&quot;">
+<meta property="og:url" content="https://splend21.github.io/posts/d94a04ca/index.html">
+<meta property="og:site_name" content="Klein">
+<meta property="og:description" content="一个 Markdown 文件就能让 AI 智能体学会新技能——这就是 Agent Skills 正在改变 AI 开发方式的故事。  前言你有没有遇到过这样的情况：每次和 AI 助手对话，都得重复解释”我们团队的 commit message 格式是 conventional commits”、”每个 PR 合并前必须过安全检查清单”、”代码风格按照我们的 ESLint 配置来”。说一遍还行，每次">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-05-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-15T17:05:27.664Z">
+<meta property="article:author" content="splend21">
+<meta property="article:tag" content="Agent Skills">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Agent Skills：给 AI 智能体装上&#34;技能包&#34; - Klein</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"splend21.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":false},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Klein</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>Search</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="Light"
+               data-label-dark="Dark">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">Dark</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/random/banner5.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Agent Skills：给 AI 智能体装上&#34;技能包&#34;"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-05-14 00:00" pubdate>
+          May 14, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.5k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Agent Skills：给 AI 智能体装上&#34;技能包&#34;</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>一个 Markdown 文件就能让 AI 智能体学会新技能——这就是 Agent Skills 正在改变 AI 开发方式的故事。</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>你有没有遇到过这样的情况：每次和 AI 助手对话，都得重复解释”我们团队的 commit message 格式是 conventional commits”、”每个 PR 合并前必须过安全检查清单”、”代码风格按照我们的 ESLint 配置来”。说一遍还行，每次都说就太烦了。</p>
+<p>更早之前，大家把所有这些规则塞进系统提示词（System Prompt）里，不管用不用得上，每次会话都全量加载，白白浪费上下文窗口。Agent Skills 的出现就是为了解决这个痛点——把专业知识打包成可复用的”技能包”，AI 需要的时候自动加载，不需要的时候只占几十个 token 的”目录空间”。</p>
+<p>读完这篇文章，你会了解：</p>
+<ul>
+<li>Agent Skills 是什么、怎么工作的</li>
+<li>为什么它在 2026 年初爆发式增长</li>
+<li>如何安装和创建自己的 Skill</li>
+</ul>
+<h2 id="什么是-Agent-Skills"><a href="#什么是-Agent-Skills" class="headerlink" title="什么是 Agent Skills"></a>什么是 Agent Skills</h2><p><strong>Agent Skills（智能体技能）</strong> 本质上就是一个文件夹，里面放着一个 <code>SKILL.md</code> 文件。这个文件用 Markdown 写成，包含两部分：</p>
+<ol>
+<li><strong>元数据（YAML frontmatter）</strong>：技能的名称和描述，告诉 AI “这个技能是干什么的、什么时候该用它”</li>
+<li><strong>指令正文（Markdown）</strong>：具体的操作步骤、规则和示例，当 AI 决定使用这个技能时才会加载</li>
+</ol>
+<p>一个最简单的 Skill 长这样：</p>
+<div class="code-wrapper"><pre><code class="hljs markdown">---
+name: commit-message-formatter
+description: &gt;-
+  按照 conventional commits 规范格式化提交信息。
+<span class="hljs-section">  当用户要求写、审查或修改 commit message 时使用此技能。</span>
+<span class="hljs-section">---</span>
+
+<span class="hljs-section"># Commit Message 格式化技能</span>
+
+<span class="hljs-section">## 规则</span>
+
+<span class="hljs-bullet">-</span> feat: 新功能
+<span class="hljs-bullet">-</span> fix: 修复 bug
+<span class="hljs-bullet">-</span> docs: 文档变更
+<span class="hljs-bullet">-</span> refactor: 重构代码（不新增功能也不修复 bug）
+
+<span class="hljs-section">## 格式要求</span>
+
+<span class="hljs-bullet">1.</span> 类型(范围): 简短描述
+<span class="hljs-bullet">2.</span> 空一行
+<span class="hljs-bullet">3.</span> 详细说明（如需要）</code></pre></div>
+
+<p>就这么简单。不需要写代码，不需要编译，一个 Markdown 文件就是一个完整的技能。</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>完整的 Skill 目录还可以包含脚本、参考文档和资源文件：</p>
+<div class="code-wrapper"><pre><code class="hljs nix">my-skill<span class="hljs-symbol">/</span>
+├── SKILL.md         <span class="hljs-comment"># 必需：元数据 + 指令</span>
+├── scripts<span class="hljs-symbol">/</span>         <span class="hljs-comment"># 可选：可执行的 Python、Bash、JS 脚本</span>
+├── references<span class="hljs-symbol">/</span>      <span class="hljs-comment"># 可选：详细的参考文档，按需加载</span>
+└── assets<span class="hljs-symbol">/</span>          <span class="hljs-comment"># 可选：模板、数据文件等</span></code></pre></div>
+
+<p>这些额外文件只有被指令正文引用时才会加载，不会被无脑塞进上下文。</p>
+<h2 id="渐进式加载：只在你需要的时候出现"><a href="#渐进式加载：只在你需要的时候出现" class="headerlink" title="渐进式加载：只在你需要的时候出现"></a>渐进式加载：只在你需要的时候出现</h2><p>Agent Skills 最核心的设计理念是<strong>渐进式加载（Progressive Disclosure）</strong>。</p>
+<p>想象你装了 50 个技能。会话启动时，AI 只读取每个技能的名称和描述——大概 30-50 个 token 一个，50 个技能加起来也就 1500-2500 个 token。这比把所有规则塞进系统提示词里节省了几个数量级。</p>
+<p>当你的任务匹配某个技能时，AI 才会加载那个技能的完整指令正文。根据 2026 年 2 月 Bosch Research 和卡内基梅隆大学的一项研究（分析了超过 40,000 个公开技能），技能正文的长度中位数是 1,414 个 token——加载一个技能完全不会挤占工作空间。</p>
+<p>用一个类比来理解：就像手机上装了 50 个 App，桌面图标（名称+描述）常驻，但 App 本身（完整指令）只有你点开时才运行。</p>
+<h2 id="为什么-Agent-Skills-突然火了"><a href="#为什么-Agent-Skills-突然火了" class="headerlink" title="为什么 Agent Skills 突然火了"></a>为什么 Agent Skills 突然火了</h2><p>Agent Skills 最初由 Anthropic 在 2025 年 12 月作为 Claude Code 的专属功能推出。两个月后，Anthropic 将规范作为<strong>开放标准</strong>发布到 agentskills.io，同时公布了合作伙伴目录——Atlassian、Canva、Cloudflare、Figma、Notion、Stripe、Zapier 等全部在列。</p>
+<p>然后数据就炸了。前面提到的那项研究发现，Agent Skills 生态在短短 <strong>20 天内增长了 18.5 倍</strong>——从 2026 年 1 月 16 日的 2,179 个技能暴增到 2 月 5 日的超过 40,000 个。单日最高峰在 1 月 25 日，一天发布了 8,857 个技能。</p>
+<p>2026 年 4 月，Y Combinator 总裁 Garry Tan 公开了他在 Claude Code 中日常使用的 6 个技能：办公时间管理、设计、代码审查、QA 测试、浏览器测试和上下文管理。不是什么宏大框架，就是一个工程师日常积累的工作流技能包。</p>
+<p>关键在于：<strong>同一个 SKILL.md 文件可以在 Claude Code、OpenAI Codex CLI、Gemini CLI、GitHub Copilot、Cursor、VS Code 等 20 多个平台上直接使用</strong>，无需修改。这种”写一次，到处跑”的特性，让技能的复用价值极高。</p>
+<h2 id="怎么用：安装一个技能"><a href="#怎么用：安装一个技能" class="headerlink" title="怎么用：安装一个技能"></a>怎么用：安装一个技能</h2><p>安装一个技能不到一分钟。使用 <code>npx skills</code> 命令行工具：</p>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 从 GitHub 仓库安装</span>
+npx skills add anthropics/skills/pdf
+
+<span class="hljs-comment"># 安装特定技能集</span>
+npx skills add firebase/agent-skills</code></pre></div>
+
+<p>不同平台读取技能的目录不同：</p>
+<ul>
+<li>Claude Code：<code>~/.claude/skills/</code></li>
+<li>Codex CLI：<code>~/.codex/skills/</code></li>
+<li>Gemini CLI：<code>~/.gemini/skills/</code></li>
+<li>Cursor：项目级目录</li>
+</ul>
+<p>安装完重启会话，技能就生效了。当你的请求匹配某个技能的描述时，AI 会自动激活它，你不需要手动调用。</p>
+<h2 id="怎么写：创建自己的技能"><a href="#怎么写：创建自己的技能" class="headerlink" title="怎么写：创建自己的技能"></a>怎么写：创建自己的技能</h2><p>创建一个技能只需要两样东西：一个文件夹和一个 Markdown 文件。</p>
+<p><strong>第一步</strong>：创建文件夹，比如 <code>~/.claude/skills/my-skill/</code></p>
+<p><strong>第二步</strong>：在里面创建 <code>SKILL.md</code></p>
+<p><strong>第三步</strong>：写元数据和指令</p>
+<p>这里有一个实用技巧——<strong>description 字段比你想的更重要</strong>。AI 就是靠这段描述来决定要不要激活你的技能。写得太模糊（比如”帮助写代码”），AI 几乎不会触发它；写得具体（比如”按照 conventional commits 规范格式化提交信息，当用户要求写、审查或修改 commit message 时使用”），触发率就高得多。</p>
+<p><strong>第四步</strong>（可选）：添加脚本和参考文档</p>
+<p>如果你的技能需要执行一些确定性操作（比如排序、数据提取、运行检查），在 <code>scripts/</code> 目录下放一个 Python 或 Bash 脚本比让 LLM 现场生成代码更快更可靠。</p>
+<p>规范建议 SKILL.md 正文控制在 5,000 token 以内，整个技能目录不超过 500 行。这个约束是好事——逼你把真正重要的指令写在正文里，把补充资料放到 <code>references/</code> 下按需加载。</p>
+<h2 id="有哪些值得装的技能"><a href="#有哪些值得装的技能" class="headerlink" title="有哪些值得装的技能"></a>有哪些值得装的技能</h2><p>一些实用且经过验证的技能方向：</p>
+<ul>
+<li><strong>文档处理</strong>：PDF、Word、Excel、PPT 等格式的读写操作</li>
+<li><strong>代码审查</strong>：结构化的代码审查流程，比随口问”帮我看看代码”效果好得多</li>
+<li><strong>前端设计</strong>：教 AI 特定的排版规则、间距系统和配色方案，告别千篇一律的”AI 风格”</li>
+<li><strong>安全扫描</strong>：运行 CodeQL、Semgrep 等工具并给出结构化的安全报告</li>
+<li><strong>网页数据获取</strong>：让 AI 能从网页抓取结构化数据，弥补它无法实时访问互联网的短板</li>
+</ul>
+<p>可以在 skills.sh 上搜索社区发布的技能，也可以直接在 GitHub 上找到官方参考实现。</p>
+<h2 id="目前的局限性"><a href="#目前的局限性" class="headerlink" title="目前的局限性"></a>目前的局限性</h2><p>Agent Skills 还在早期阶段，有几个坑值得知道：</p>
+<ul>
+<li><strong>会话中途修改技能不生效</strong>：技能在会话启动时加载，修改后需要重启会话</li>
+<li><strong>发现质量参差不齐</strong>：研究发现 46% 的技能和至少一个其他技能重名，很多是低质量重复</li>
+<li><strong>开发者造的不一定是用户最需要的</strong>：55% 的技能是软件开发类，而需求最高的信息检索类反而供给不足</li>
+<li><strong>安全性需要注意</strong>：近 40% 的已发布技能会访问敏感上下文或执行写入操作，使用前最好审查一下内容</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Agent Skills 做了一件很简单但很重要的事：把 AI 的专业知识从”每次都重复说”变成了”写一次，自动复用”。一个 Markdown 文件，几十行指令，就能让 AI 智能体在你的工作流中表现得像一个经过培训的团队成员。</p>
+<p>开放标准意味着你投入时间打造的技能不会绑定在单一平台上。如果你正在用任何支持技能的 AI 工具，建议今天就从创建一个小技能开始——哪怕只是把你最常重复的那条规则写进去。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://agentskills.io/">Agent Skills Specification</a> — 开放标准规范</li>
+<li><a target="_blank" rel="noopener" href="https://www.firecrawl.dev/blog/agent-skills">Agent Skills Explained: How SKILL.md Files Work</a> — Firecrawl 详细解读</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2602.08004">Agent Skills: A Data-Driven Analysis</a> — Bosch Research &amp; CMU 研究论文</li>
+<li><a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/build-with-claude/skills-guide">Using Agent Skills with the API</a> — Anthropic 官方文档</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Agent-Skills/" class="print-no-link">#Agent Skills</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Agent Skills：给 AI 智能体装上&#34;技能包&#34;</div>
+      <div>https://splend21.github.io/posts/d94a04ca/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>splend21</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 14, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/7b616482/" title="IDEA 2026.1 通过 ACP 接入 Claude Code">
+                        <span class="hidden-mobile">IDEA 2026.1 通过 ACP 接入 Claude Code</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
