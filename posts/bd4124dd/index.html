@@ -19,12 +19,12 @@
   <meta name="author" content="splend21">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.Java中只有值传递相较于其他程序设计语言（比如 C++、 Pascal）提供的两种参数传递的方式，在 Java 中只有值传递。  值传递：方法接收的是实参值的拷贝，会创建副本。 引用传递：方法接收的直接是实参的地址，而不是实参内的值，这就是指针，此时形参就是实参，对形参的任何修改都会反应到实参，包括重新赋值。  2.一段Java程序是如何运行的在讨论Java的值传递之前，先来看看一段Java">
+    <meta name="description" content="1.Java中只有值传递 相较于其他程序设计语言（比如 C++、 Pascal）提供的两种参数传递的方式，在 Java 中只有值传递。  值传递：方法接收的是实参值的拷贝，会创建副本。 引用传递：方法接收的直接是实参的地址，而不是实参内的值，这就是指针，此时形参就是实参，对形参的任何修改都会反应到实参，包括重新赋值。  2.一段Java程序是如何运行的 在讨论Java的值传递之前，先来看看一段Ja">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从JVM的内存结构出发，探究Java的值传递">
 <meta property="og:url" content="https://splend21.github.io/posts/bd4124dd/index.html">
 <meta property="og:site_name" content="Klein">
-<meta property="og:description" content="1.Java中只有值传递相较于其他程序设计语言（比如 C++、 Pascal）提供的两种参数传递的方式，在 Java 中只有值传递。  值传递：方法接收的是实参值的拷贝，会创建副本。 引用传递：方法接收的直接是实参的地址，而不是实参内的值，这就是指针，此时形参就是实参，对形参的任何修改都会反应到实参，包括重新赋值。  2.一段Java程序是如何运行的在讨论Java的值传递之前，先来看看一段Java">
+<meta property="og:description" content="1.Java中只有值传递 相较于其他程序设计语言（比如 C++、 Pascal）提供的两种参数传递的方式，在 Java 中只有值传递。  值传递：方法接收的是实参值的拷贝，会创建副本。 引用传递：方法接收的直接是实参的地址，而不是实参内的值，这就是指针，此时形参就是实参，对形参的任何修改都会反应到实参，包括重新赋值。  2.一段Java程序是如何运行的 在讨论Java的值传递之前，先来看看一段Ja">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://typora114514.oss-cn-beijing.aliyuncs.com/img/20260402225426692.png">
 <meta property="og:image" content="https://typora114514.oss-cn-beijing.aliyuncs.com/img/20260402225516300.png">
@@ -359,12 +359,14 @@
             
               <div class="markdown-body">
                 
-                <h5 id="1-Java中只有值传递"><a href="#1-Java中只有值传递" class="headerlink" title="1.Java中只有值传递"></a>1.Java中只有值传递</h5><p>相较于其他程序设计语言（比如 C++、 Pascal）提供的两种参数传递的方式，在 Java 中只有值传递。</p>
+                <h5 id="1-Java中只有值传递">1.Java中只有值传递</h5>
+<p>相较于其他程序设计语言（比如 C++、 Pascal）提供的两种参数传递的方式，在 Java 中只有值传递。</p>
 <ul>
 <li><strong>值传递</strong>：方法接收的是实参值的拷贝，会创建副本。</li>
 <li><strong>引用传递</strong>：方法接收的直接是实参的地址，而不是实参内的值，这就是指针，此时形参就是实参，对形参的任何修改都会反应到实参，包括重新赋值。</li>
 </ul>
-<h5 id="2-一段Java程序是如何运行的"><a href="#2-一段Java程序是如何运行的" class="headerlink" title="2.一段Java程序是如何运行的"></a>2.一段Java程序是如何运行的</h5><p>在讨论Java的值传递之前，先来看看一段Java程序运行时，JVM的内存变化</p>
+<h5 id="2-一段Java程序是如何运行的">2.一段Java程序是如何运行的</h5>
+<p>在讨论Java的值传递之前，先来看看一段Java程序运行时，JVM的内存变化</p>
 <div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MethodExampleTest</span> &#123;
     
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
@@ -382,7 +384,6 @@
         <span class="hljs-keyword">return</span> n;
     &#125;
 &#125;</code></pre></div>
-
 <p>首先当我们运行这个类的时候，首先做的事就是类加载，将该类的字节码文件加载到JVM虚拟机中，对应其中的方法区内存（为了观感，这里使用源代码的形式）</p>
 <p>加载完成之后首先启动对应main的主线程，同时分配一块栈内存，之后由任务调度器调度执行，当CPU核心的时间片分给了我们的主线程，main方法作为入口首先被分配一块栈帧，配合每个线程独有的程序计数器（记录当前线程正在执行的字节码指令地址），开始运行主线程中的代码（栈帧中的局部变量表对应方法中的局部变量和方法参数）</p>
 <p><img src="https://typora114514.oss-cn-beijing.aliyuncs.com/img/20260402225426692.png" srcset="/img/loading.gif" lazyload alt="屏幕截图 2026-02-05 231041"></p>
@@ -392,7 +393,9 @@
 <p><img src="https://typora114514.oss-cn-beijing.aliyuncs.com/img/20260402225537155.png" srcset="/img/loading.gif" lazyload alt="屏幕截图 2026-02-05 231857"></p>
 <p>直到方法依次调用结束，释放无用栈帧，并根据记录的返回地址，继续执行接下来的代码直到所有栈帧均被释放，程序运行结束。</p>
 <p>经过上面的内容在来看Java的值传递，相信下面的几个例子已经难不倒你了。</p>
-<h5 id="3-值传递的几个例子"><a href="#3-值传递的几个例子" class="headerlink" title="3.值传递的几个例子"></a>3.值传递的几个例子</h5><h6 id="1-传递基本类型参数"><a href="#1-传递基本类型参数" class="headerlink" title="1.传递基本类型参数"></a>1.传递基本类型参数</h6><div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+<h5 id="3-值传递的几个例子">3.值传递的几个例子</h5>
+<h6 id="1-传递基本类型参数">1.传递基本类型参数</h6>
+<div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
     <span class="hljs-type">int</span> <span class="hljs-variable">num1</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;
     <span class="hljs-type">int</span> <span class="hljs-variable">num2</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;
     swap(num1, num2);
@@ -413,9 +416,9 @@
 <span class="hljs-comment">//b = 10</span>
 <span class="hljs-comment">//num1 = 10</span>
 <span class="hljs-comment">//num2 = 20</span></code></pre></div>
-
 <p>在 <code>swap()</code> 方法中，<code>a</code>、<code>b</code> 的值进行交换，并不会影响到 <code>num1</code>、<code>num2</code>。因为交换操作发生在自己的方法栈帧中。作为副本的内容无论怎么修改，都不会影响到原件本身。</p>
-<h6 id="2-传递引用参数类型"><a href="#2-传递引用参数类型" class="headerlink" title="2.传递引用参数类型"></a>2.传递引用参数类型</h6><div class="code-wrapper"><pre><code class="hljs java">  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+<h6 id="2-传递引用参数类型">2.传递引用参数类型</h6>
+<div class="code-wrapper"><pre><code class="hljs java">  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
       <span class="hljs-type">int</span>[] <span class="hljs-variable">arr</span> <span class="hljs-operator">=</span> &#123; <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span> &#125;;
       System.out.println(arr[<span class="hljs-number">0</span>]);
       change(arr);
@@ -430,7 +433,6 @@
 <span class="hljs-comment">//输出:</span>
 <span class="hljs-comment">//1</span>
 <span class="hljs-comment">//0</span></code></pre></div>
-
 <p>这里看着像引用传递，但其实传递的还是值，这个值就是数组在堆内存中的地址，由 arr 与 array 共同指向，所以方法内部的修改才能影响到实参</p>
 <div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;
     <span class="hljs-keyword">private</span> String name;
@@ -458,8 +460,7 @@
 <span class="hljs-comment">//person2:小张</span>
 <span class="hljs-comment">//xiaoZhang:小张</span>
 <span class="hljs-comment">//xiaoLi:小李</span></code></pre></div>
-
-<p>这里与上面的那种情况又有所不同，在进行方法调用的时候，由于是值传递，person1与person2作为xiaoZhang与xiaoLi的拷贝，各自存在不同的栈帧，正因为如此，方法栈帧内部的交换不会影响到其他栈帧，所以才没有影响到原来的 xiaoZhang 与 xiaoLi </p>
+<p>这里与上面的那种情况又有所不同，在进行方法调用的时候，由于是值传递，person1与person2作为xiaoZhang与xiaoLi的拷贝，各自存在不同的栈帧，正因为如此，方法栈帧内部的交换不会影响到其他栈帧，所以才没有影响到原来的 xiaoZhang 与 xiaoLi</p>
 
                 
               </div>
@@ -592,6 +593,12 @@
 
 
 
+  
+
+
+
+
+  
   
 
 
@@ -849,6 +856,49 @@
   });
 </script>
 
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

@@ -19,12 +19,12 @@
   <meta name="author" content="splend21">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一个 Markdown 文件就能让 AI 智能体学会新技能——这就是 Agent Skills 正在改变 AI 开发方式的故事。  前言你有没有遇到过这样的情况：每次和 AI 助手对话，都得重复解释”我们团队的 commit message 格式是 conventional commits”、”每个 PR 合并前必须过安全检查清单”、”代码风格按照我们的 ESLint 配置来”。说一遍还行，每次">
+    <meta name="description" content="一个 Markdown 文件就能让 AI 智能体学会新技能——这就是 Agent Skills 正在改变 AI 开发方式的故事。  前言 你有没有遇到过这样的情况：每次和 AI 助手对话，都得重复解释&quot;我们团队的 commit message 格式是 conventional commits&quot;、“每个 PR 合并前必须过安全检查清单”、“代码风格按照我们的 ESLint 配置">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Agent Skills：给 AI 智能体装上&quot;技能包&quot;">
 <meta property="og:url" content="https://splend21.github.io/posts/d94a04ca/index.html">
 <meta property="og:site_name" content="Klein">
-<meta property="og:description" content="一个 Markdown 文件就能让 AI 智能体学会新技能——这就是 Agent Skills 正在改变 AI 开发方式的故事。  前言你有没有遇到过这样的情况：每次和 AI 助手对话，都得重复解释”我们团队的 commit message 格式是 conventional commits”、”每个 PR 合并前必须过安全检查清单”、”代码风格按照我们的 ESLint 配置来”。说一遍还行，每次">
+<meta property="og:description" content="一个 Markdown 文件就能让 AI 智能体学会新技能——这就是 Agent Skills 正在改变 AI 开发方式的故事。  前言 你有没有遇到过这样的情况：每次和 AI 助手对话，都得重复解释&quot;我们团队的 commit message 格式是 conventional commits&quot;、“每个 PR 合并前必须过安全检查清单”、“代码风格按照我们的 ESLint 配置">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-05-13T16:00:00.000Z">
 <meta property="article:modified_time" content="2026-08-15T17:05:27.664Z">
@@ -300,7 +300,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k words
+          3.6k words
         
       </span>
     
@@ -358,15 +358,17 @@
                 <blockquote>
 <p>一个 Markdown 文件就能让 AI 智能体学会新技能——这就是 Agent Skills 正在改变 AI 开发方式的故事。</p>
 </blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>你有没有遇到过这样的情况：每次和 AI 助手对话，都得重复解释”我们团队的 commit message 格式是 conventional commits”、”每个 PR 合并前必须过安全检查清单”、”代码风格按照我们的 ESLint 配置来”。说一遍还行，每次都说就太烦了。</p>
-<p>更早之前，大家把所有这些规则塞进系统提示词（System Prompt）里，不管用不用得上，每次会话都全量加载，白白浪费上下文窗口。Agent Skills 的出现就是为了解决这个痛点——把专业知识打包成可复用的”技能包”，AI 需要的时候自动加载，不需要的时候只占几十个 token 的”目录空间”。</p>
+<h2 id="前言">前言</h2>
+<p>你有没有遇到过这样的情况：每次和 AI 助手对话，都得重复解释&quot;我们团队的 commit message 格式是 conventional commits&quot;、“每个 PR 合并前必须过安全检查清单”、“代码风格按照我们的 ESLint 配置来”。说一遍还行，每次都说就太烦了。</p>
+<p>更早之前，大家把所有这些规则塞进系统提示词（System Prompt）里，不管用不用得上，每次会话都全量加载，白白浪费上下文窗口。Agent Skills 的出现就是为了解决这个痛点——把专业知识打包成可复用的&quot;技能包&quot;，AI 需要的时候自动加载，不需要的时候只占几十个 token 的&quot;目录空间&quot;。</p>
 <p>读完这篇文章，你会了解：</p>
 <ul>
 <li>Agent Skills 是什么、怎么工作的</li>
 <li>为什么它在 2026 年初爆发式增长</li>
 <li>如何安装和创建自己的 Skill</li>
 </ul>
-<h2 id="什么是-Agent-Skills"><a href="#什么是-Agent-Skills" class="headerlink" title="什么是 Agent Skills"></a>什么是 Agent Skills</h2><p><strong>Agent Skills（智能体技能）</strong> 本质上就是一个文件夹，里面放着一个 <code>SKILL.md</code> 文件。这个文件用 Markdown 写成，包含两部分：</p>
+<h2 id="什么是-Agent-Skills">什么是 Agent Skills</h2>
+<p><strong>Agent Skills（智能体技能）</strong> 本质上就是一个文件夹，里面放着一个 <code>SKILL.md</code> 文件。这个文件用 Markdown 写成，包含两部分：</p>
 <ol>
 <li><strong>元数据（YAML frontmatter）</strong>：技能的名称和描述，告诉 AI “这个技能是干什么的、什么时候该用它”</li>
 <li><strong>指令正文（Markdown）</strong>：具体的操作步骤、规则和示例，当 AI 决定使用这个技能时才会加载</li>
@@ -393,31 +395,32 @@ description: &gt;-
 <span class="hljs-bullet">1.</span> 类型(范围): 简短描述
 <span class="hljs-bullet">2.</span> 空一行
 <span class="hljs-bullet">3.</span> 详细说明（如需要）</code></pre></div>
-
 <p>就这么简单。不需要写代码，不需要编译，一个 Markdown 文件就是一个完整的技能。</p>
-<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>完整的 Skill 目录还可以包含脚本、参考文档和资源文件：</p>
+<h3 id="目录结构">目录结构</h3>
+<p>完整的 Skill 目录还可以包含脚本、参考文档和资源文件：</p>
 <div class="code-wrapper"><pre><code class="hljs nix">my-skill<span class="hljs-symbol">/</span>
 ├── SKILL.md         <span class="hljs-comment"># 必需：元数据 + 指令</span>
 ├── scripts<span class="hljs-symbol">/</span>         <span class="hljs-comment"># 可选：可执行的 Python、Bash、JS 脚本</span>
 ├── references<span class="hljs-symbol">/</span>      <span class="hljs-comment"># 可选：详细的参考文档，按需加载</span>
 └── assets<span class="hljs-symbol">/</span>          <span class="hljs-comment"># 可选：模板、数据文件等</span></code></pre></div>
-
 <p>这些额外文件只有被指令正文引用时才会加载，不会被无脑塞进上下文。</p>
-<h2 id="渐进式加载：只在你需要的时候出现"><a href="#渐进式加载：只在你需要的时候出现" class="headerlink" title="渐进式加载：只在你需要的时候出现"></a>渐进式加载：只在你需要的时候出现</h2><p>Agent Skills 最核心的设计理念是<strong>渐进式加载（Progressive Disclosure）</strong>。</p>
+<h2 id="渐进式加载：只在你需要的时候出现">渐进式加载：只在你需要的时候出现</h2>
+<p>Agent Skills 最核心的设计理念是<strong>渐进式加载（Progressive Disclosure）</strong>。</p>
 <p>想象你装了 50 个技能。会话启动时，AI 只读取每个技能的名称和描述——大概 30-50 个 token 一个，50 个技能加起来也就 1500-2500 个 token。这比把所有规则塞进系统提示词里节省了几个数量级。</p>
 <p>当你的任务匹配某个技能时，AI 才会加载那个技能的完整指令正文。根据 2026 年 2 月 Bosch Research 和卡内基梅隆大学的一项研究（分析了超过 40,000 个公开技能），技能正文的长度中位数是 1,414 个 token——加载一个技能完全不会挤占工作空间。</p>
 <p>用一个类比来理解：就像手机上装了 50 个 App，桌面图标（名称+描述）常驻，但 App 本身（完整指令）只有你点开时才运行。</p>
-<h2 id="为什么-Agent-Skills-突然火了"><a href="#为什么-Agent-Skills-突然火了" class="headerlink" title="为什么 Agent Skills 突然火了"></a>为什么 Agent Skills 突然火了</h2><p>Agent Skills 最初由 Anthropic 在 2025 年 12 月作为 Claude Code 的专属功能推出。两个月后，Anthropic 将规范作为<strong>开放标准</strong>发布到 agentskills.io，同时公布了合作伙伴目录——Atlassian、Canva、Cloudflare、Figma、Notion、Stripe、Zapier 等全部在列。</p>
+<h2 id="为什么-Agent-Skills-突然火了">为什么 Agent Skills 突然火了</h2>
+<p>Agent Skills 最初由 Anthropic 在 2025 年 12 月作为 Claude Code 的专属功能推出。两个月后，Anthropic 将规范作为<strong>开放标准</strong>发布到 <a target="_blank" rel="noopener" href="http://agentskills.io">agentskills.io</a>，同时公布了合作伙伴目录——Atlassian、Canva、Cloudflare、Figma、Notion、Stripe、Zapier 等全部在列。</p>
 <p>然后数据就炸了。前面提到的那项研究发现，Agent Skills 生态在短短 <strong>20 天内增长了 18.5 倍</strong>——从 2026 年 1 月 16 日的 2,179 个技能暴增到 2 月 5 日的超过 40,000 个。单日最高峰在 1 月 25 日，一天发布了 8,857 个技能。</p>
 <p>2026 年 4 月，Y Combinator 总裁 Garry Tan 公开了他在 Claude Code 中日常使用的 6 个技能：办公时间管理、设计、代码审查、QA 测试、浏览器测试和上下文管理。不是什么宏大框架，就是一个工程师日常积累的工作流技能包。</p>
-<p>关键在于：<strong>同一个 SKILL.md 文件可以在 Claude Code、OpenAI Codex CLI、Gemini CLI、GitHub Copilot、Cursor、VS Code 等 20 多个平台上直接使用</strong>，无需修改。这种”写一次，到处跑”的特性，让技能的复用价值极高。</p>
-<h2 id="怎么用：安装一个技能"><a href="#怎么用：安装一个技能" class="headerlink" title="怎么用：安装一个技能"></a>怎么用：安装一个技能</h2><p>安装一个技能不到一分钟。使用 <code>npx skills</code> 命令行工具：</p>
+<p>关键在于：<strong>同一个 <a target="_blank" rel="noopener" href="http://SKILL.md">SKILL.md</a> 文件可以在 Claude Code、OpenAI Codex CLI、Gemini CLI、GitHub Copilot、Cursor、VS Code 等 20 多个平台上直接使用</strong>，无需修改。这种&quot;写一次，到处跑&quot;的特性，让技能的复用价值极高。</p>
+<h2 id="怎么用：安装一个技能">怎么用：安装一个技能</h2>
+<p>安装一个技能不到一分钟。使用 <code>npx skills</code> 命令行工具：</p>
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 从 GitHub 仓库安装</span>
 npx skills add anthropics/skills/pdf
 
 <span class="hljs-comment"># 安装特定技能集</span>
 npx skills add firebase/agent-skills</code></pre></div>
-
 <p>不同平台读取技能的目录不同：</p>
 <ul>
 <li>Claude Code：<code>~/.claude/skills/</code></li>
@@ -426,33 +429,38 @@ npx skills add firebase/agent-skills</code></pre></div>
 <li>Cursor：项目级目录</li>
 </ul>
 <p>安装完重启会话，技能就生效了。当你的请求匹配某个技能的描述时，AI 会自动激活它，你不需要手动调用。</p>
-<h2 id="怎么写：创建自己的技能"><a href="#怎么写：创建自己的技能" class="headerlink" title="怎么写：创建自己的技能"></a>怎么写：创建自己的技能</h2><p>创建一个技能只需要两样东西：一个文件夹和一个 Markdown 文件。</p>
+<h2 id="怎么写：创建自己的技能">怎么写：创建自己的技能</h2>
+<p>创建一个技能只需要两样东西：一个文件夹和一个 Markdown 文件。</p>
 <p><strong>第一步</strong>：创建文件夹，比如 <code>~/.claude/skills/my-skill/</code></p>
 <p><strong>第二步</strong>：在里面创建 <code>SKILL.md</code></p>
 <p><strong>第三步</strong>：写元数据和指令</p>
-<p>这里有一个实用技巧——<strong>description 字段比你想的更重要</strong>。AI 就是靠这段描述来决定要不要激活你的技能。写得太模糊（比如”帮助写代码”），AI 几乎不会触发它；写得具体（比如”按照 conventional commits 规范格式化提交信息，当用户要求写、审查或修改 commit message 时使用”），触发率就高得多。</p>
+<p>这里有一个实用技巧——<strong>description 字段比你想的更重要</strong>。AI 就是靠这段描述来决定要不要激活你的技能。写得太模糊（比如&quot;帮助写代码&quot;），AI 几乎不会触发它；写得具体（比如&quot;按照 conventional commits 规范格式化提交信息，当用户要求写、审查或修改 commit message 时使用&quot;），触发率就高得多。</p>
 <p><strong>第四步</strong>（可选）：添加脚本和参考文档</p>
 <p>如果你的技能需要执行一些确定性操作（比如排序、数据提取、运行检查），在 <code>scripts/</code> 目录下放一个 Python 或 Bash 脚本比让 LLM 现场生成代码更快更可靠。</p>
-<p>规范建议 SKILL.md 正文控制在 5,000 token 以内，整个技能目录不超过 500 行。这个约束是好事——逼你把真正重要的指令写在正文里，把补充资料放到 <code>references/</code> 下按需加载。</p>
-<h2 id="有哪些值得装的技能"><a href="#有哪些值得装的技能" class="headerlink" title="有哪些值得装的技能"></a>有哪些值得装的技能</h2><p>一些实用且经过验证的技能方向：</p>
+<p>规范建议 <a target="_blank" rel="noopener" href="http://SKILL.md">SKILL.md</a> 正文控制在 5,000 token 以内，整个技能目录不超过 500 行。这个约束是好事——逼你把真正重要的指令写在正文里，把补充资料放到 <code>references/</code> 下按需加载。</p>
+<h2 id="有哪些值得装的技能">有哪些值得装的技能</h2>
+<p>一些实用且经过验证的技能方向：</p>
 <ul>
 <li><strong>文档处理</strong>：PDF、Word、Excel、PPT 等格式的读写操作</li>
-<li><strong>代码审查</strong>：结构化的代码审查流程，比随口问”帮我看看代码”效果好得多</li>
-<li><strong>前端设计</strong>：教 AI 特定的排版规则、间距系统和配色方案，告别千篇一律的”AI 风格”</li>
+<li><strong>代码审查</strong>：结构化的代码审查流程，比随口问&quot;帮我看看代码&quot;效果好得多</li>
+<li><strong>前端设计</strong>：教 AI 特定的排版规则、间距系统和配色方案，告别千篇一律的&quot;AI 风格&quot;</li>
 <li><strong>安全扫描</strong>：运行 CodeQL、Semgrep 等工具并给出结构化的安全报告</li>
 <li><strong>网页数据获取</strong>：让 AI 能从网页抓取结构化数据，弥补它无法实时访问互联网的短板</li>
 </ul>
-<p>可以在 skills.sh 上搜索社区发布的技能，也可以直接在 GitHub 上找到官方参考实现。</p>
-<h2 id="目前的局限性"><a href="#目前的局限性" class="headerlink" title="目前的局限性"></a>目前的局限性</h2><p>Agent Skills 还在早期阶段，有几个坑值得知道：</p>
+<p>可以在 <a target="_blank" rel="noopener" href="http://skills.sh">skills.sh</a> 上搜索社区发布的技能，也可以直接在 GitHub 上找到官方参考实现。</p>
+<h2 id="目前的局限性">目前的局限性</h2>
+<p>Agent Skills 还在早期阶段，有几个坑值得知道：</p>
 <ul>
 <li><strong>会话中途修改技能不生效</strong>：技能在会话启动时加载，修改后需要重启会话</li>
 <li><strong>发现质量参差不齐</strong>：研究发现 46% 的技能和至少一个其他技能重名，很多是低质量重复</li>
 <li><strong>开发者造的不一定是用户最需要的</strong>：55% 的技能是软件开发类，而需求最高的信息检索类反而供给不足</li>
 <li><strong>安全性需要注意</strong>：近 40% 的已发布技能会访问敏感上下文或执行写入操作，使用前最好审查一下内容</li>
 </ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Agent Skills 做了一件很简单但很重要的事：把 AI 的专业知识从”每次都重复说”变成了”写一次，自动复用”。一个 Markdown 文件，几十行指令，就能让 AI 智能体在你的工作流中表现得像一个经过培训的团队成员。</p>
+<h2 id="总结">总结</h2>
+<p>Agent Skills 做了一件很简单但很重要的事：把 AI 的专业知识从&quot;每次都重复说&quot;变成了&quot;写一次，自动复用&quot;。一个 Markdown 文件，几十行指令，就能让 AI 智能体在你的工作流中表现得像一个经过培训的团队成员。</p>
 <p>开放标准意味着你投入时间打造的技能不会绑定在单一平台上。如果你正在用任何支持技能的 AI 工具，建议今天就从创建一个小技能开始——哪怕只是把你最常重复的那条规则写进去。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<h2 id="参考资料">参考资料</h2>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://agentskills.io/">Agent Skills Specification</a> — 开放标准规范</li>
 <li><a target="_blank" rel="noopener" href="https://www.firecrawl.dev/blog/agent-skills">Agent Skills Explained: How SKILL.md Files Work</a> — Firecrawl 详细解读</li>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2602.08004">Agent Skills: A Data-Driven Analysis</a> — Bosch Research &amp; CMU 研究论文</li>
@@ -590,6 +598,12 @@ npx skills add firebase/agent-skills</code></pre></div>
 
 
 
+  
+
+
+
+
+  
   
 
 
@@ -847,6 +861,49 @@ npx skills add firebase/agent-skills</code></pre></div>
   });
 </script>
 
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

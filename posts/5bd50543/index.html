@@ -359,7 +359,8 @@
 <p>在Java中，Serializer（序列化器）是一个广义的概念，指的是将对象状态转换为可存储或可传输格式的过程的工具或组件。它并不是特指某一个框架，而是一种设计模式或功能，可以由不同的库或框架提供。</p>
 <p>Java提供了内置的序列化机制（实现java.io.Serializable接口），但也有很多第三方库提供了更高效、跨语言的序列化方案，如JSON（Jackson、Gson）、XML、Protocol Buffers、Kryo等。</p>
 <p>下面分别介绍几种常见的序列化方式。</p>
-<h4 id="一、Java内置序列化（基于Serializable接口）"><a href="#一、Java内置序列化（基于Serializable接口）" class="headerlink" title="一、Java内置序列化（基于Serializable接口）"></a>一、Java内置序列化（基于Serializable接口）</h4><p>使用步骤：</p>
+<h4 id="一、Java内置序列化（基于Serializable接口）">一、Java内置序列化（基于Serializable接口）</h4>
+<p>使用步骤：</p>
 <ol>
 <li>让需要序列化的类实现java.io.Serializable接口（标记接口，没有方法）。</li>
 <li>使用ObjectOutputStream和ObjectInputStream进行序列化和反序列化。</li>
@@ -407,20 +408,19 @@
         &#125;
     &#125;
 &#125;</code></pre></div>
-
 <p>注意：</p>
 <ul>
 <li>transient关键字：标记的成员变量不参与序列化。</li>
 <li>serialVersionUID：用于控制版本，如果序列化和反序列化的版本不一致，会抛出InvalidClassException。</li>
 </ul>
-<h4 id="二、JSON序列化（以Jackson为例）"><a href="#二、JSON序列化（以Jackson为例）" class="headerlink" title="二、JSON序列化（以Jackson为例）"></a>二、JSON序列化（以Jackson为例）</h4><p>使用Jackson库进行JSON序列化和反序列化。</p>
+<h4 id="二、JSON序列化（以Jackson为例）">二、JSON序列化（以Jackson为例）</h4>
+<p>使用Jackson库进行JSON序列化和反序列化。</p>
 <p>首先，添加Jackson依赖（Maven）：</p>
 <div class="code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jackson-databind<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.13.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span> <span class="hljs-comment">&lt;!-- 请使用最新版本 --&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre></div>
-
 <p>示例代码：</p>
 <div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -439,21 +439,22 @@
         System.out.println(<span class="hljs-string">&quot;反序列化对象: &quot;</span> + deserializedPerson);
     &#125;
 &#125;</code></pre></div>
-
-<p>注意：Person类此时不需要实现Serializable接口，但需要有默认构造方法和getter&#x2F;setter方法（或者通过注解配置）。</p>
-<h4 id="三、其他序列化框架"><a href="#三、其他序列化框架" class="headerlink" title="三、其他序列化框架"></a>三、其他序列化框架</h4><ol>
+<p>注意：Person类此时不需要实现Serializable接口，但需要有默认构造方法和getter/setter方法（或者通过注解配置）。</p>
+<h4 id="三、其他序列化框架">三、其他序列化框架</h4>
+<ol>
 <li>Gson：Google提供的JSON库，用法类似。</li>
 <li>Protocol Buffers（protobuf）：Google推出的跨语言、高性能的序列化框架，需要先定义.proto文件。</li>
 <li>Kryo：专注于Java对象序列化，性能高，但跨语言支持弱。</li>
 </ol>
 <p>选择序列化方式时，需考虑以下因素：</p>
 <ul>
-<li>性能：序列化&#x2F;反序列化的速度、字节大小。</li>
+<li>性能：序列化/反序列化的速度、字节大小。</li>
 <li>可读性：是否需要人类可读的格式（如JSON、XML）。</li>
 <li>跨语言：是否需要支持多种编程语言。</li>
 <li>兼容性：协议是否向前向后兼容。</li>
 </ul>
-<h4 id="四、自定义序列化"><a href="#四、自定义序列化" class="headerlink" title="四、自定义序列化"></a>四、自定义序列化</h4><p>在Java内置序列化中，可以通过在类中实现writeObject和readObject方法来自定义序列化过程。</p>
+<h4 id="四、自定义序列化">四、自定义序列化</h4>
+<p>在Java内置序列化中，可以通过在类中实现writeObject和readObject方法来自定义序列化过程。</p>
 <p>示例：</p>
 <div class="code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">CustomPerson</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Serializable</span> &#123;
     <span class="hljs-keyword">private</span> String name;
@@ -476,7 +477,6 @@
         <span class="hljs-built_in">this</span>.age = in.readInt();
     &#125;
 &#125;</code></pre></div>
-
 <p>总结：</p>
 <p>Java中序列化的使用方式多样，根据需求选择合适的序列化框架。内置序列化简单但性能不高，且跨语言能力差；JSON序列化可读性好且跨语言；Protobuf等二进制协议性能高，适合网络传输。</p>
 
@@ -611,6 +611,12 @@
 
 
 
+  
+
+
+
+
+  
   
 
 
@@ -868,6 +874,49 @@
   });
 </script>
 
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
